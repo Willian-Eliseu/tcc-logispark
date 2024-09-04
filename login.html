@@ -68,11 +68,40 @@
 
     <!-- login Start -->
     <section>
-        <div class="container-fluid p-0">
-            <div class="row m-0">
-                <div class="col-lg-3 d-flex align-items-center bg-light">
+        <div class="container-fluid p-0 bg-light">
+            <div class="row m-0 justify-content-center">
+                <div class="col-lg-3 col-md-6 d-flex align-items-center">
                     <form id="login-form">
-teste
+                        <h2 class="text-primary fw-bold text-center">
+                            LOGIN
+                        </h2>
+                        <div class="row px-lg-5 my-3">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="form_email">Email: </label>
+                                    <input type="email" name="form_email" id="form_email" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form_password">
+                                    <label for="form-password">Senha: </label>
+                                    <input type="password" name="form_password" id="form_password" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <div class="form-group d-grid">
+                                    <button class="btn btn-primary" type="submit" id="submit-btn">Entrar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row px-lg-5">
+                            <p class="text-center small mb-0">
+                                Não possui cadastro? Clique <a href="subscribe.html" class="fw-bold">aqui</a> para se cadastrar.
+                            </p>
+                            <p class="text-center small">
+                                Esqueceu sua senha? Clique <a href="requestpasschange.html" class="fw-bold">aqui</a> para solicitar uma alteração de senha.
+                            </p>
+                        </div>
                     </form>
                 </div>
                 <div class="col d-none d-lg-block p-0">
