@@ -82,7 +82,7 @@
                             <p class="small text-center">
                                 Campos marcados com (*), são obrigatórios
                             </p>
-                            <div class="row px-lg-5 my-3">
+                            <div class="row g-3 px-lg-5 my-3">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="form_name">Nome: </label>
@@ -96,9 +96,12 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form_password">
-                                        <label for="form-password">Senha: </label>
-                                        <input type="password" name="form_password" id="form_password" class="form-control" required>
+                                    <div class="form-group">
+                                        <label for="form_password">Senha: </label>
+                                        <div class="input-group rounded">
+                                            <input type="password" name="form_password" id="form_password" class="form-control" aria-label="Defina uma senha" aria-describedby="btn-view-password">
+                                            <button class="btn btn-outline-secondary" type="button" id="btn-view-password"><i class="fas fa-eye"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 mt-4">

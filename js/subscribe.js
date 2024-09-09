@@ -41,3 +41,15 @@ formulary.onsubmit = (e) => {
         $('#submit-btn').prop('disabled', false);
     });
 }
+
+$('#btn-view-password').on('click', function(){
+    if($('#form_password').attr('type') == "password"){
+        //text
+        $('#form_password').attr('type', "text");
+        $('#btn-view-password').html('<i class="fas fa-eye-slash"></i>');
+    }else{
+        //password
+        $('#form_password').attr('type', "password");
+        $('#btn-view-password').html('<i class="fas fa-eye"></i>');
+    }
+});
