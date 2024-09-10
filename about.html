@@ -286,11 +286,19 @@
         <!-- Template Javascript -->
         <script src="./js/header.js"></script>
         <script src="./js/footer.js"></script>
-        <!-- <script src="./js/header.js"></script> -->
         <script>
             $(()=>{
                 $.getScript("./js/main.js", function(){
                     $('#aboutpage').addClass('active');
+                    if(sessionStorage.getItem('nome') != null){
+                        $('#login-start').addClass('d-none');
+                        $('#post-login').removeClass('d-none');
+                        $('#gamepage').removeClass('d-none');
+
+                        let fullName = sessionStorage.getItem('nome');
+                        let firstName = fullName.split(' ')[0];
+                        $('#user-name').html(firstName);
+                    }
                 });
             });
         </script>

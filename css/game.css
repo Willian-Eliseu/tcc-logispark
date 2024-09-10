@@ -1,0 +1,38 @@
+#body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    font-family: 'VT323', monospace;
+    background-color: #414141;
+}
+
+.game-border{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    height: 600px;
+    background-color: antiquewhite;
+    padding: 32px;
+    border: #4d7a99 solid 10px;
+    border-radius: 32px;
+    box-shadow: inset 0 0 0 10px #a7bd70;
+}
+
+.game-title{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-size: 3rem;
+}
+
+.game-instruction{
+    text-align: center;
+    padding: 0 10px;
+    font-size: 1.5rem;
+}

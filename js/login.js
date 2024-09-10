@@ -17,6 +17,14 @@ formulary.onsubmit = (e) => {
             sessionStorage.setItem('nivel', data.user_level);
             sessionStorage.setItem('active', data.user_active);
 
+            $('#login-start').addClass('d-none');
+            $('#post-login').removeClass('d-none');
+            $('#gamepage').removeClass('d-none');
+
+            let fullName = data.user_name;
+            let firstName = fullName.split(' ')[0];
+            $('#user-name').html(firstName);
+
             Swal.fire({
                 title: 'Bem vindo(a)!',
                 text: 'Bons estudos!!!',

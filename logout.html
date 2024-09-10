@@ -49,7 +49,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-secondary-subtle">
 
     <!-- Spinner Start -->
     <div id="spinner"
@@ -63,72 +63,11 @@
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
         <header id="header"></header>
-
-        <!-- Header Start -->
-        <div class="container-fluid bg-breadcrumb">
-            <div class="container text-center py-5" style="max-width: 900px;">
-                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Ranking</h4>
-                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active text-primary">Ranking</li>
-                </ol>    
-            </div>
-        </div>
-        <!-- Header End -->
     </div>
     <!-- Navbar & Hero End -->
 
-    <!-- ranking Start -->
-    <section class="py-5">
-        <div class="container py-5">
-            <div class="row g-3">
-                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-                    <div class="p-3">
-                        <h1 class="display-5 mb-4 text-center text-primary fw-bold">
-                            Modo Fase
-                        </h1>
-                        <p class="border p-3 mb-0 fs-4 fw-bold rounded-top">
-                            <i class="fas fa-medal text-warning"></i> - <span id="firstFase">Fulano</span>
-                        </p>
-                        <p class="border p-3 mb-0 fs-4 fw-bold">
-                            <i class="fas fa-medal"></i> - <span id="secondFase">Ciclano</span>
-                        </p>
-                        <p class="border p-3 mb-0 fs-4 fw-bold rounded-bottom shadow">
-                            <i class="fas fa-medal text-danger"></i> - <span id="thirdFase">Beltrano</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
-                    <div class="p-3">
-                        <h1 class="display-5 mb-4 text-center text-primary fw-bold">
-                            Modo Aleatório
-                        </h1>
-                        <p class="border p-3 mb-0 fs-4 fw-bold rounded-top">
-                            <i class="fas fa-medal text-warning"></i> - <span id="firstRandom">Fulano</span>
-                        </p>
-                        <p class="border p-3 mb-0 fs-4 fw-bold">
-                            <i class="fas fa-medal"></i> - <span id="secondRandom">Ciclano</span>
-                        </p>
-                        <p class="border p-3 mb-0 fs-4 fw-bold rounded-bottom shadow">
-                            <i class="fas fa-medal text-danger"></i> - <span id="thirdRandom">Beltrano</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <p class="text-center fs-4">
-                        Seu nome não está no ranking? Não desanime, continue jogando, aprendendo e se divertindo!
-                    </p>
-                    <p class="text-center">
-                        <a href="game.html" class="btn btn-primary p-3 fs-4">JOGAR AGORA</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ranking End -->
 
-    <footer id="footer"></footer>
+
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
@@ -144,25 +83,31 @@
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./js/ranking.js"></script>
-
 
     <!-- Template Javascript -->
     <script src="./js/header.js"></script>
     <script src="./js/footer.js"></script>
+    <script type="module" src="./js/game.js"></script>
     <script>
-        $(()=>{
-            $.getScript("./js/main.js", function(){
-                $('#rankingpage').addClass('active');
-                if(sessionStorage.getItem('nome') != null){
-                    $('#login-start').addClass('d-none');
-                    $('#post-login').removeClass('d-none');
-                    $('#gamepage').removeClass('d-none');
-
-                    let fullName = sessionStorage.getItem('nome');
-                    let firstName = fullName.split(' ')[0];
-                    $('#user-name').html(firstName);
-                }
+        $(() => {
+            $.getScript("./js/main.js", function () {
+                Swal.fire({
+                    title: "Logout",
+                    text: "Quer mesmo sair?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sim, sair",
+                    cancelButtonText: "Não",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        sessionStorage.clear();
+                        window.location.href = "./"
+                    }else{
+                        history.back();
+                    }
+                });
             });
         });
     </script>
