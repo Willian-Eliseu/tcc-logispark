@@ -1,8 +1,6 @@
-function tutorial(){
-    window.alert('O tutorial estará disponível em breve!');
-}
-
-$('#btn-tutorial').on('click', tutorial);
+$('#btn-tutorial').on('click', function(){
+    window.location.href = './tutorial.html';
+});
 
 function fase(){
     window.alert('O modo fase estará disponível em breve!');

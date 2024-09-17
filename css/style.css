@@ -983,3 +983,8 @@
 #alteration-form{
     display: none;
 }
+
+body{
+    height: 100vh;
+    background-color: #17303b;
+}
