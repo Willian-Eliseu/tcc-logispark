@@ -984,7 +984,6 @@
     display: none;
 }
 
-/* body{
-    height: 100vh;
-    background-color: #17303b;
-} */
+.fullheight{
+    min-height: calc(100vh - 66.5px);
+}
