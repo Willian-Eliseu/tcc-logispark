@@ -4,6 +4,7 @@ $('#btn-tutorial').on('click', function(){
 
 function fase(){
     window.alert('O modo fase estará disponível em breve!');
+    window.location.href = './fase.html';
 }
 
 $('#btn-fase').on('click', fase);
