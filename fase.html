@@ -45,7 +45,7 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/game.css" rel="stylesheet">
+        <link href="css/fase.css" rel="stylesheet">
     </head>
 
     <body>
@@ -58,20 +58,73 @@
 
         <!-- Board Start -->
         <div id="body">
-            <div class="game-border">
-                <img src="./img/logo.png" id="game-logo" alt="Logo do Jogo">
-                <h1 class="game-title">LogiSpark</h1>
-                <div class="row">
-                    <div class="col-12">
-                        <p class="d-grid">
-                            <button id="btn-fase" class="btn btn-primary px-4">Modo Fase</button>
-                        </p>
-                        <p class="d-grid">
-                            <button id="btn-aleatorio" class="btn btn-primary px-4">Modo Aleatório</button>
-                        </p>
-                        <p class="d-grid">
-                            <button id="btn-tutorial" class="btn btn-primary px-4">* Ver o tutorial *</button>
-                        </p>
+            <div>
+                <div class="game-border">
+                    <div class="game-container">
+                        <div class="panel">
+                            <!-- instruções -->
+                            <h1 class="game-title">Como jogar:</h1>
+                            <ul class="game-instructions">
+                                <li>Utilize o painel de opções para construir seu algorítimo;</li>
+                                <li>Após construir seu código, clique em "Start";</li>
+                                <li>O objetivo é fazer o bloco vermelho chegar até o bloco azul sem colidir com nenhum bloco intermediário;</li>
+                                <li>para remover um código, clique sobre ele no painel do algorítimo;</li>
+                                
+                            </ul>
+                        </div>
+                        <div class="panel">
+                            <div id="game-board">
+                                <div id="0"></div>
+                                <div id="1"></div>
+                                <div id="2"></div>
+                                <div id="3"></div>
+                                <div id="4" class="final"></div>
+        
+                                <div id="5"></div>
+                                <div id="6"></div>
+                                <div id="7"></div>
+                                <div id="8"></div>
+                                <div id="9"></div>
+        
+                                <div id="10"></div>
+                                <div id="11"></div>
+                                <div id="12"></div>
+                                <div id="13"></div>
+                                <div id="14"></div>
+        
+                                <div id="15"></div>
+                                <div id="16"></div>
+                                <div id="17"></div>
+                                <div id="18"></div>
+                                <div id="19"></div>
+        
+                                <div id="20" class="robot"></div>
+                                <div id="21"></div>
+                                <div id="22"></div>
+                                <div id="23"></div>
+                                <div id="24"></div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <h1 class="game-title">Algorítimo:</h1>
+                            <div id="alg-board">
+                                <div id="algorithm"></div>
+                            </div>
+                        </div>
+                        <div class="panel options">
+                            <h1 class="game-title">Opções:</h1>
+                            <div id="opt-board">
+                                <button id="right-one">1x <i class="fa-solid fa-right-long"></i></button>
+                                <button id="left-one">1x <i class="fa-solid fa-left-long"></i></button>
+                                <button id="up-one">1x <i class="fa-solid fa-up-long"></i></button>
+                                <button id="down-one">1x <i class="fa-solid fa-down-long"></i></button>
+                                <button id="right-two">2x <i class="fa-solid fa-right-long"></i></button>
+                                <button id="left-two">2x <i class="fa-solid fa-left-long"></i></button>
+                                <button id="up-two">2x <i class="fa-solid fa-up-long"></i></button>
+                                <button id="down-two">2x <i class="fa-solid fa-down-long"></i></button>
+                            </div>
+                            <button id="start-game">Start <i class="fa-solid fa-thumbs-up"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,7 +145,7 @@
         <!-- Template Javascript -->
         <script src="./js/header.js"></script>
         <script src="./js/footer.js"></script>
-        <script type="module" src="./js/game.js"></script>
+        <script type="module" src="./js/fase.js"></script>
         <script>
             $(()=>{
                 $.getScript("./js/main.js", function(){
