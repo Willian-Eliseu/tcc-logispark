@@ -63,9 +63,10 @@ $(() => {
     cancelButtonColor: "#d33",
     confirmButtonText: "Iniciar",
     cancelButtonText: "Cancelar",
+    backdrop: false,
   }).then((result) => {
     if (result.isConfirmed) {
-      if (localStorage.getItem("actualfase") > 0) {
+      if (parseInt(localStorage.getItem("actualfase")) > 0) {
         obstacles = arrayObstacles[localStorage.getItem("actualfase")];
         loadObstacles();
       } else {
@@ -79,6 +80,13 @@ $(() => {
 });
 
 function loadObstacles() {
+  const tabuleiro = document.querySelectorAll("#game-board > div");
+  tabuleiro.forEach((elemento) => {
+    elemento.classList.remove("obstacle", "final", "robot");
+  });
+  document.getElementById("9").classList.add("final");
+  document.getElementById("90").classList.add("robot");
+
   obstacles.forEach((value) => {
     document.getElementById(value).classList.add("obstacle");
   });
@@ -136,20 +144,113 @@ startGame.addEventListener("click", function () {
   game(0);
 });
 
+function Crashing() {
+  Swal.fire({
+    title: "Ah, que pena, você bateu...",
+    html: `<p>Deseja reiniciar este nível?</p>`,
+    icon: "info",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Reiniciar",
+    cancelButtonText: "Cancelar",
+    backdrop: false,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      startGame.disabled = false;
+      if (parseInt(localStorage.getItem("actualfase")) > 0) {
+        while (algList.length) {
+          algList.pop();
+        }
+        refreshList();
+        obstacles = arrayObstacles[localStorage.getItem("actualfase")];
+        loadObstacles();
+        return;
+      } else {
+        while (algList.length) {
+          algList.pop();
+        }
+        refreshList();
+        obstacles = arrayObstacles[0];
+        loadObstacles();
+        return;
+      }
+    } else {
+      window.location.href = "./game.html";
+    }
+  });
+}
+
+function StageClear() {
+  let faseAtual = parseInt(localStorage.getItem("actualfase"));
+  faseAtual += 1;
+  localStorage.setItem("actualfase", faseAtual);
+
+  Swal.fire({
+    title: "Parabéns, você finalizou esta fase!",
+    html: `<p>Deseja ir para a próxima?</p>`,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim",
+    cancelButtonText: "Cancelar",
+    backdrop: false,
+  }).then((result) => {
+    startGame.disabled = false;
+    if (result.isConfirmed) {
+      obstacles = arrayObstacles[faseAtual];
+      loadObstacles();
+    } else {
+      window.location.href = "./game.html";
+    }
+  });
+}
+
+function Winning() {
+  Swal.fire({
+    title: "Parabéns!",
+    html: `<p>você dominou todas as fases!</p>`,
+    icon: "success",
+    showCancelButton: false,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Voltar",
+    cancelButtonText: "Cancelar",
+    backdrop: false,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "./game.html";
+    } else {
+      window.location.href = "./game.html";
+    }
+  });
+}
+
+function gameRun() {}
+
 function game(position, robot = 90) {
   if (position <= algList.length) {
     //executa
     setTimeout(() => {
       let robotPosition = movement(algList[position], robot);
       if (robotPosition == -1) {
-        window.alert("Você bateu! Mais sorte da próxima vez"); //continuar aqui
-        startGame.disabled = false;
-        return false;
+        //window.alert("Você bateu! Mais sorte da próxima vez"); //continuar aqui
+        //startGame.disabled = false;
+        //return false;
+        Crashing();
       } else if (obstacles.includes(robotPosition)) {
-        window.alert("Você bateu! Mais sorte da próxima vez");
-        startGame.disabled = false;
-        return false;
+        // window.alert("Você bateu! Mais sorte da próxima vez");
+        // startGame.disabled = false;
+        // return false;
+        Crashing();
       } else if (robotPosition == 9) {
+        if (localStorage.getItem("actualfase") == 9) {
+          Winning();
+        } else {
+          StageClear();
+        }
+        /*
         window.alert("Parabéns, você dominou a construção de algorítimos!");
         algorithm.innerHTML = "";
         while (algList.length) {
@@ -157,11 +258,12 @@ function game(position, robot = 90) {
         }
         startGame.disabled = false;
         window.location.href = "./index.html";
+        */
         //verificar esta parte de finalização
+      } else {
+        position++;
+        game(position, robotPosition);
       }
-      //array de instruções
-      position++;
-      game(position, robotPosition);
     }, gameSpeed);
   } else {
     console.log("o jogo acabou");
