@@ -121,6 +121,25 @@ button{
     color: #fff;
 }
 
+#desistir{
+    background-color: #861d1d;
+    border-radius: 12px;
+    border: none;
+    font-size: 18px;
+}
+
+#desistir:hover{
+    box-shadow: inset 2px 2px 8px #b83232;
+}
+
+#desistir:disabled{
+    background-color: #6e8b7d;
+    border-radius: 12px;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+}
+
 .options{
     display: flex;
     flex-direction: column;

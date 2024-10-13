@@ -10,8 +10,9 @@ const downTwo = document.querySelector("#down-two");
 const algorithm = document.querySelector("#algorithm");
 const algList = [];
 const startGame = document.querySelector("#start-game");
+const desistir = document.querySelector('#desistir');
 var obstacles = [];
-const gameSpeed = 1000;
+const gameSpeed = 800;
 
 const arrayObstacles = [
   [12, 26, 78, 3, 56, 89, 23, 67, 91, 34, 1, 58, 92, 6, 71, 38, 84, 19, 47, 25],
@@ -68,10 +69,10 @@ $(() => {
     if (result.isConfirmed) {
       if (parseInt(localStorage.getItem("actualfase")) > 0) {
         obstacles = arrayObstacles[localStorage.getItem("actualfase")];
-        loadObstacles();
+        loadObstacles(obstacles);
       } else {
         obstacles = arrayObstacles[0];
-        loadObstacles();
+        loadObstacles(obstacles);
       }
     } else {
       window.location.href = "./game.html";
@@ -79,15 +80,16 @@ $(() => {
   });
 });
 
-function loadObstacles() {
+function loadObstacles(obstaculos) {
   const tabuleiro = document.querySelectorAll("#game-board > div");
   tabuleiro.forEach((elemento) => {
     elemento.classList.remove("obstacle", "final", "robot");
   });
+
   document.getElementById("9").classList.add("final");
   document.getElementById("90").classList.add("robot");
 
-  obstacles.forEach((value) => {
+  obstaculos.forEach((value) => {
     document.getElementById(value).classList.add("obstacle");
   });
 }
@@ -129,8 +131,8 @@ function addElement(identificator) {
 function refreshList() {
   algorithm.innerHTML = "";
   algList.forEach((k, v) => {
-    console.log(k, v);
-    algorithm.innerHTML += `<button class="btn-algorithm" onclick="removeInstruction(this.id)" id="${v}">${k}</button>`;
+    //console.log(k, v);
+    algorithm.innerHTML += `<button class="btn-algorithm" onclick="removeInstruction(this.id);" id="${v}">${k}</button>`;
   });
 }
 
@@ -139,12 +141,25 @@ function removeInstruction(id) {
   refreshList();
 }
 
+desistir.addEventListener("click", function(){
+  window.location.href = "./game.html";
+})
+
 startGame.addEventListener("click", function () {
-  startGame.disabled = true;
+  //startGame.disabled = true;
+  startGame.classList.add('d-none');
+  desistir.classList.remove('d-none');
   game(0);
 });
 
 function Crashing() {
+  let faseAtual = localStorage.getItem("actualfase") ? localStorage.getItem("actualfase") : 0;
+  faseAtual = parseInt(faseAtual);
+
+  let tentativas = localStorage.getItem(`tentativas-${faseAtual}`) ? parseInt(localStorage.getItem(`tentativas-${faseAtual}`)) : 0;
+  tentativas += 1;
+  localStorage.setItem(`tentativas-${faseAtual}`, tentativas);
+  
   Swal.fire({
     title: "Ah, que pena, você bateu...",
     html: `<p>Deseja reiniciar este nível?</p>`,
@@ -157,24 +172,15 @@ function Crashing() {
     backdrop: false,
   }).then((result) => {
     if (result.isConfirmed) {
-      startGame.disabled = false;
-      if (parseInt(localStorage.getItem("actualfase")) > 0) {
-        while (algList.length) {
-          algList.pop();
-        }
-        refreshList();
-        obstacles = arrayObstacles[localStorage.getItem("actualfase")];
-        loadObstacles();
-        return;
-      } else {
-        while (algList.length) {
-          algList.pop();
-        }
-        refreshList();
-        obstacles = arrayObstacles[0];
-        loadObstacles();
-        return;
+      //startGame.disabled = false;
+      startGame.classList.remove('d-none');
+      desistir.classList.add('d-none');
+      while (algList.length) {
+        algList.pop();
       }
+      refreshList();
+      obstacles = arrayObstacles[faseAtual];
+      loadObstacles(obstacles);
     } else {
       window.location.href = "./game.html";
     }
@@ -182,8 +188,21 @@ function Crashing() {
 }
 
 function StageClear() {
-  let faseAtual = parseInt(localStorage.getItem("actualfase"));
-  faseAtual += 1;
+  let faseAtual = localStorage.getItem("actualfase") ? localStorage.getItem("actualfase") : 0;
+
+  //salvar estágio atual
+  /*
+  let tentativasAtual = localStorage.getItem(`tentativas-${faseAtual}`);
+  let urlSalvarFase = "";
+  $.post(urlSalvarFase, {
+    fase: faseAtual,
+    tentativas: tentativasAtual,
+    usuario: sessionStorage.getItem('key')
+  });
+  */
+  //////////////////////
+
+  faseAtual = parseInt(faseAtual) + 1;
   localStorage.setItem("actualfase", faseAtual);
 
   Swal.fire({
@@ -197,10 +216,17 @@ function StageClear() {
     cancelButtonText: "Cancelar",
     backdrop: false,
   }).then((result) => {
-    startGame.disabled = false;
+    //startGame.disabled = false;
+    startGame.classList.remove('d-none');
+    desistir.classList.add('d-none');
     if (result.isConfirmed) {
+      //startGame.disabled = false;
+      while (algList.length) {
+        algList.pop();
+      }
+      refreshList();
       obstacles = arrayObstacles[faseAtual];
-      loadObstacles();
+      loadObstacles(obstacles);
     } else {
       window.location.href = "./game.html";
     }
@@ -208,6 +234,7 @@ function StageClear() {
 }
 
 function Winning() {
+  localStorage.setItem('finalizou', true);
   Swal.fire({
     title: "Parabéns!",
     html: `<p>você dominou todas as fases!</p>`,
@@ -231,35 +258,19 @@ function gameRun() {}
 
 function game(position, robot = 90) {
   if (position <= algList.length) {
-    //executa
     setTimeout(() => {
       let robotPosition = movement(algList[position], robot);
       if (robotPosition == -1) {
-        //window.alert("Você bateu! Mais sorte da próxima vez"); //continuar aqui
-        //startGame.disabled = false;
-        //return false;
         Crashing();
       } else if (obstacles.includes(robotPosition)) {
-        // window.alert("Você bateu! Mais sorte da próxima vez");
-        // startGame.disabled = false;
-        // return false;
         Crashing();
       } else if (robotPosition == 9) {
-        if (localStorage.getItem("actualfase") == 9) {
+        let faseAtual = localStorage.getItem("actualfase") ? parseInt(localStorage.getItem("actualfase")) : 0;
+        if (faseAtual == 9) {
           Winning();
         } else {
           StageClear();
         }
-        /*
-        window.alert("Parabéns, você dominou a construção de algorítimos!");
-        algorithm.innerHTML = "";
-        while (algList.length) {
-          algList.pop();
-        }
-        startGame.disabled = false;
-        window.location.href = "./index.html";
-        */
-        //verificar esta parte de finalização
       } else {
         position++;
         game(position, robotPosition);

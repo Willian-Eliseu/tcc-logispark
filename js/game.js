@@ -9,8 +9,9 @@ function fase(){
 
 $('#btn-fase').on('click', fase);
 
-function aleatorio(){
-    window.alert('O modo aleatório estará disponível em breve!');
+function limpaTentativas(){
+    localStorage.clear();
+    Swal.fire('Limpo!!!','Todas as tentativas foram removidas!','success');
 }
 
-$('#btn-aleatorio').on('click', aleatorio);
+$('#btn-tentativas').on('click', limpaTentativas);
