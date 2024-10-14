@@ -58,25 +58,76 @@
 
         <!-- Board Start -->
         <div id="body">
-            <div class="game-border">
-                <img src="./img/logo.png" id="game-logo" alt="Logo do Jogo">
-                <h1 class="game-title">LogiSpark</h1>
-                <div class="row">
-                    <div class="col-12">
-                        <p class="d-grid">
-                            <button id="btn-fase" class="btn btn-primary px-4">Modo Fase</button>
-                        </p>
-                        <p class="d-grid d-none" id="escolherfase">
-                            <button id="btn-escolherfase" class="btn btn-primary px-4">Escolher a fase</button>
-                        </p>
-                        <p class="d-grid">
-                            <button id="btn-tentativas" class="btn btn-primary px-4">Limpar as tentativas</button>
-                        </p>
-                        <p class="d-grid">
-                            <button id="btn-tutorial" class="btn btn-primary px-4">* Ver o tutorial *</button>
-                        </p>
-                    </div>
+            <div class="game-border-fc">
+                <div class="shadow pointer rounded-3" onclick="defineFase(0)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 1</em>
+                    </p>
+                    <img src="./img/tabuleiros/t1.jpg" alt="miniatura do tabuleiro 1">
                 </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(1)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 2</em>
+                    </p>
+                    <img src="./img/tabuleiros/t2.jpg" alt="miniatura do tabuleiro 2">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(2)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 3</em>
+                    </p>
+                    <img src="./img/tabuleiros/t3.jpg" alt="miniatura do tabuleiro 3">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(3)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 4</em>
+                    </p>
+                    <img src="./img/tabuleiros/t4.jpg" alt="miniatura do tabuleiro 4">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(4)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 5</em>
+                    </p>
+                    <img src="./img/tabuleiros/t5.jpg" alt="miniatura do tabuleiro 5">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(5)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 6</em>
+                    </p>
+                    <img src="./img/tabuleiros/t6.jpg" alt="miniatura do tabuleiro 6">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(6)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 7</em>
+                    </p>
+                    <img src="./img/tabuleiros/t7.jpg" alt="miniatura do tabuleiro 7">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(7)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 8</em>
+                    </p>
+                    <img src="./img/tabuleiros/t8.jpg" alt="miniatura do tabuleiro 8">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(8)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 9</em>
+                    </p>
+                    <img src="./img/tabuleiros/t9.jpg" alt="miniatura do tabuleiro 9">
+                </div>
+                <div class="shadow pointer rounded-3" onclick="defineFase(9)">
+                    <p class="text-center fs-4 mb-0">
+                        <em>Fase 10</em>
+                    </p>
+                    <img src="./img/tabuleiros/t10.jpg" alt="miniatura do tabuleiro 10">
+                </div>
+                <div></div>
+                <div></div>
+                <div>
+                    <p class="text-center mb-0 py-3">
+                        <a href="javascript:history.back()" class="btn btn-primary">VOLTAR</a>
+                    </p>
+                </div>
+                <div></div>
+                <div></div>
             </div>
         </div>
         <!-- Board End -->
@@ -96,7 +147,7 @@
         <!-- Template Javascript -->
         <script src="./js/header.js"></script>
         <script src="./js/footer.js"></script>
-        <script type="module" src="./js/game.js"></script>
+        <script src="./js/phasechoice.js"></script>
         <script>
             $(()=>{
                 $.getScript("./js/main.js", function(){

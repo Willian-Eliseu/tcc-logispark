@@ -87,7 +87,7 @@
     <!-- Template Javascript -->
     <script src="./js/header.js"></script>
     <script src="./js/footer.js"></script>
-    <script type="module" src="./js/game.js"></script>
+    
     <script>
         $(() => {
             $.getScript("./js/main.js", function () {
@@ -103,6 +103,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         sessionStorage.clear();
+                        localStorage.clear();
                         window.location.href = "./"
                     }else{
                         history.back();

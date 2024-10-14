@@ -1,17 +1,22 @@
-$('#btn-tutorial').on('click', function(){
-    window.location.href = './tutorial.html';
+$(() => {
+  if (localStorage.getItem("finalizou")) {
+    $("#escolherfase").removeClass("d-none");
+  }
 });
 
-function fase(){
-    //window.alert('O modo fase estará disponível em breve!');
-    window.location.href = './fase.html';
-}
+$("#btn-tutorial").on("click", function () {
+  window.location.href = "./tutorial.html";
+});
 
-$('#btn-fase').on('click', fase);
+$("#btn-fase").on("click", function () {
+  window.location.href = "./fase.html";
+});
 
-function limpaTentativas(){
-    localStorage.clear();
-    Swal.fire('Limpo!!!','Todas as tentativas foram removidas!','success');
-}
+$("#btn-tentativas").on("click", function () {
+  localStorage.clear();
+  Swal.fire("Limpo!!!", "Todas as tentativas foram removidas!", "success");
+});
 
-$('#btn-tentativas').on('click', limpaTentativas);
+$("#btn-escolherfase").on("click", function () {
+  window.location.href = "./phasechoice.html";
+});
