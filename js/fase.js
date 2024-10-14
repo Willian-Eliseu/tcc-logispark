@@ -10,7 +10,7 @@ const downTwo = document.querySelector("#down-two");
 const algorithm = document.querySelector("#algorithm");
 const algList = [];
 const startGame = document.querySelector("#start-game");
-const desistir = document.querySelector('#desistir');
+const desistir = document.querySelector("#desistir");
 var obstacles = [];
 const gameSpeed = 800;
 
@@ -141,25 +141,29 @@ function removeInstruction(id) {
   refreshList();
 }
 
-desistir.addEventListener("click", function(){
+desistir.addEventListener("click", function () {
   window.location.href = "./game.html";
-})
+});
 
 startGame.addEventListener("click", function () {
   //startGame.disabled = true;
-  startGame.classList.add('d-none');
-  desistir.classList.remove('d-none');
+  startGame.classList.add("d-none");
+  desistir.classList.remove("d-none");
   game(0);
 });
 
 function Crashing() {
-  let faseAtual = localStorage.getItem("actualfase") ? localStorage.getItem("actualfase") : 0;
+  let faseAtual = localStorage.getItem("actualfase")
+    ? localStorage.getItem("actualfase")
+    : 0;
   faseAtual = parseInt(faseAtual);
 
-  let tentativas = localStorage.getItem(`tentativas-${faseAtual}`) ? parseInt(localStorage.getItem(`tentativas-${faseAtual}`)) : 0;
+  let tentativas = localStorage.getItem(`tentativas-${faseAtual}`)
+    ? parseInt(localStorage.getItem(`tentativas-${faseAtual}`))
+    : 0;
   tentativas += 1;
   localStorage.setItem(`tentativas-${faseAtual}`, tentativas);
-  
+
   Swal.fire({
     title: "Ah, que pena, você bateu...",
     html: `<p>Deseja reiniciar este nível?</p>`,
@@ -173,8 +177,8 @@ function Crashing() {
   }).then((result) => {
     if (result.isConfirmed) {
       //startGame.disabled = false;
-      startGame.classList.remove('d-none');
-      desistir.classList.add('d-none');
+      startGame.classList.remove("d-none");
+      desistir.classList.add("d-none");
       while (algList.length) {
         algList.pop();
       }
@@ -188,18 +192,20 @@ function Crashing() {
 }
 
 function StageClear() {
-  let faseAtual = localStorage.getItem("actualfase") ? localStorage.getItem("actualfase") : 0;
+  let faseAtual = localStorage.getItem("actualfase")
+    ? localStorage.getItem("actualfase")
+    : 0;
 
   //salvar estágio atual
-  /*
+
   let tentativasAtual = localStorage.getItem(`tentativas-${faseAtual}`);
-  let urlSalvarFase = "";
+  let urlSalvarFase = "https://test.wl.tv.br/eliseu/tcc/api/ranking.php";
   $.post(urlSalvarFase, {
     fase: faseAtual,
     tentativas: tentativasAtual,
-    usuario: sessionStorage.getItem('key')
+    usuario: sessionStorage.getItem("key"),
   });
-  */
+
   //////////////////////
 
   faseAtual = parseInt(faseAtual) + 1;
@@ -217,8 +223,8 @@ function StageClear() {
     backdrop: false,
   }).then((result) => {
     //startGame.disabled = false;
-    startGame.classList.remove('d-none');
-    desistir.classList.add('d-none');
+    startGame.classList.remove("d-none");
+    desistir.classList.add("d-none");
     if (result.isConfirmed) {
       //startGame.disabled = false;
       while (algList.length) {
@@ -234,7 +240,7 @@ function StageClear() {
 }
 
 function Winning() {
-  localStorage.setItem('finalizou', true);
+  localStorage.setItem("finalizou", true);
   Swal.fire({
     title: "Parabéns!",
     html: `<p>você dominou todas as fases!</p>`,
@@ -265,7 +271,9 @@ function game(position, robot = 90) {
       } else if (obstacles.includes(robotPosition)) {
         Crashing();
       } else if (robotPosition == 9) {
-        let faseAtual = localStorage.getItem("actualfase") ? parseInt(localStorage.getItem("actualfase")) : 0;
+        let faseAtual = localStorage.getItem("actualfase")
+          ? parseInt(localStorage.getItem("actualfase"))
+          : 0;
         if (faseAtual == 9) {
           Winning();
         } else {
