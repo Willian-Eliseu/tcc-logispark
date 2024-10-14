@@ -55,8 +55,14 @@ const arrayObstacles = [
 ];
 
 $(() => {
+  let fase =
+    localStorage.getItem("actualfase") != null
+      ? parseInt(localStorage.getItem("actualfase"))
+      : 0;
+  fase += 1;
+
   Swal.fire({
-    title: "Vamos começar?",
+    title: `Fase ${fase} - Vamos começar?`,
     html: `<p>Clique em "iniciar" para começar o desafio!</p>`,
     icon: "info",
     showCancelButton: true,
