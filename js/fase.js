@@ -56,7 +56,7 @@ const arrayObstacles = [
 
 $(() => {
   let fase =
-    localStorage.getItem("actualfase") != null
+    localStorage.getItem("actualfase") != "null"
       ? parseInt(localStorage.getItem("actualfase"))
       : 0;
   fase += 1;
@@ -159,9 +159,10 @@ startGame.addEventListener("click", function () {
 });
 
 function Crashing() {
-  let faseAtual = localStorage.getItem("actualfase")
-    ? localStorage.getItem("actualfase")
-    : 0;
+  let faseAtual =
+    localStorage.getItem("actualfase") != "null"
+      ? localStorage.getItem("actualfase")
+      : 0;
   faseAtual = parseInt(faseAtual);
 
   let tentativas = localStorage.getItem(`tentativas-${faseAtual}`)
@@ -198,18 +199,23 @@ function Crashing() {
 }
 
 function StageClear() {
-  let faseAtual = localStorage.getItem("actualfase")
-    ? localStorage.getItem("actualfase")
-    : 0;
+  let faseAtual =
+    localStorage.getItem("actualfase") != "null"
+      ? localStorage.getItem("actualfase")
+      : 0;
 
   //salvar estágio atual
 
-  let tentativasAtual = localStorage.getItem(`tentativas-${faseAtual}`);
+  let tentativasAtual = localStorage.getItem(`tentativas-${faseAtual}`)
+    ? localStorage.getItem(`tentativas-${faseAtual}`)
+    : 1;
   let urlSalvarFase = "https://test.wl.tv.br/eliseu/tcc/api/ranking.php";
   $.post(urlSalvarFase, {
     fase: faseAtual,
     tentativas: tentativasAtual,
     usuario: sessionStorage.getItem("key"),
+  }).done(function (data) {
+    console.log(data);
   });
 
   //////////////////////
