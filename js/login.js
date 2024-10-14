@@ -14,7 +14,7 @@ formulary.onsubmit = (e) => {
         sessionStorage.setItem("nivel", data.user_level);
         sessionStorage.setItem("active", data.user_active);
         localStorage.setItem("actualfase", data.user_actualfase);
-        if (user_actualfase == 9) {
+        if (data.user_actualfase == 9) {
           localStorage.setItem("finalizou", true);
         }
 
