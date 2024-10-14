@@ -209,7 +209,7 @@ function StageClear() {
   let tentativasAtual = localStorage.getItem(`tentativas-${faseAtual}`)
     ? localStorage.getItem(`tentativas-${faseAtual}`)
     : 1;
-  let urlSalvarFase = "https://test.wl.tv.br/eliseu/tcc/api/ranking.php";
+  let urlSalvarFase = "https://test.wl.tv.br/eliseu/tcc/api/setranking.php";
   $.post(urlSalvarFase, {
     fase: faseAtual,
     tentativas: tentativasAtual,

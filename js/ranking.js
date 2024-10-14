@@ -1,4 +1,4 @@
-const url = "https://test.wl.tv.br/eliseu/tcc/api/ranking.php";
+const url = "https://test.wl.tv.br/eliseu/tcc/api/getranking.php";
 
 $(function () {
   $.get(url)
